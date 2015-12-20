@@ -25,9 +25,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String ENDPOINT = "https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&codistancefrompoint=40.7127%7C-74.0059&generator=geosearch&redirects=&ggscoord=40.7127%7C-74.0059&ggsradius=10&ggslimit=5&ggsnamespace=6&ggsprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&ggsprimary=all&formatversion=2";
+    //private static final String ENDPOINT = "https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&codistancefrompoint=40.7127%7C-74.0059&generator=geosearch&redirects=&ggscoord=40.7127%7C-74.0059&ggsradius=10&ggslimit=5&ggsnamespace=6&ggsprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&ggsprimary=all&formatversion=2";
+    private static final String ENDPOINT = "https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&codistancefrompoint=38.11386944444445%7C13.356263888888888&generator=geosearch&redirects=&ggscoord=38.11386944444445%7C13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&ggsprimary=all&formatversion=2";
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new Gson();
 
@@ -166,11 +168,12 @@ public class MainActivity extends AppCompatActivity {
     private static class Page {
         private int pageid;
         private int ns;
+        private ArrayList<Object> categories;
         @NonNull private String title;
 
         @Override
         public String toString() {
-            return "pageid=" + pageid + " ns=" + ns + " title=" + title;
+            return "pageid=" + pageid + " ns=" + ns + " title=" + title + " categories=" + categories;
         }
     }
 }

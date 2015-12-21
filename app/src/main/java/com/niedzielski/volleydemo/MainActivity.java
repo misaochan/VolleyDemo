@@ -159,8 +159,10 @@ public class MainActivity extends AppCompatActivity {
             for (Page page : pages) {
                 builder.append(page.toString());
                 builder.append("\n");
+                page.extractCategories();
             }
             builder.replace(builder.length() - 1, builder.length(), "");
+
             return builder.toString();
         }
     }
@@ -168,12 +170,63 @@ public class MainActivity extends AppCompatActivity {
     private static class Page {
         private int pageid;
         private int ns;
-        private ArrayList<Object> categories;
         @NonNull private String title;
+        private ArrayList<Object> categories;
+        private Category category;
+
+        public boolean categoryExists()  {
+            if (categories != null) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public void extractCategories() {
+            if (categoryExists()==true) {
+                Log.d("Cat", "categories exist");
+                for (Object categoryobj : categories) {
+                    Log.d("Cat", categoryobj.getClass().getName());
+                }
+            }
+            else {
+                Log.d("Cat", "categories don't exist");
+            }
+        }
 
         @Override
         public String toString() {
-            return "pageid=" + pageid + " ns=" + ns + " title=" + title + " categories=" + categories;
+
+            if (categoryExists()==true) {
+                return "pageid=" + pageid + " ns=" + ns + " title=" + title + " categories=";// + category.toString();
+            }
+            else {
+                return "pageid=" + pageid + " ns=" + ns + " title=" + title;
+            }
         }
+
+    }
+
+    private class Category {
+        private Category [] categories;
+        private int ns;
+        private String title;
+
+        public Category(Object categoryobj) {
+            //TODO
+        }
+        
+        public String toString() {
+            StringBuilder builder = new StringBuilder("categories=");
+            for (Category category: categories) {
+                builder.append(category.toString());
+                builder.append("\n");
+            }
+            builder.replace(builder.length() - 1, builder.length(), "");
+            return builder.toString();
+        }
+
+
     }
 }
